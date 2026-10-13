@@ -1,0 +1,25 @@
+Fontes da página (ficam aqui para que nada seja buscado em servidores de terceiros)
+
+  mestrali-sans.woff2    derivada de Source Sans 3
+  mestrali-serif.woff2   derivada de Source Serif 4
+
+As duas fontes originais são da Adobe (http://www.adobe.com/), com o nome
+reservado "Source", e são distribuídas sob a SIL Open Font License, versão 1.1:
+https://scripts.sil.org/OFL
+
+O que foi alterado: os arquivos trazem só os caracteres latinos usados em
+português e os pesos de 400 a 700, para ficarem leves no celular (cerca de
+20 a 30 KB cada). Como são versões modificadas, a licença pede que não usem o
+nome reservado; por isso se chamam "Mestrali Sans" e "Mestrali Serif".
+O aviso de copyright e a licença originais continuam gravados dentro de cada
+arquivo, e estas versões seguem sob a mesma licença (OFL 1.1).
+
+  mestrali-marca.woff2   derivada de Open Sauce One Bold
+
+A fonte da palavra "Mestrali" é a Open Sauce One, de The Open Sauce One Authors
+(https://github.com/marcologous/Open-Sauce-Fonts), também sob a SIL Open Font
+License 1.1 e sem nome reservado. O arquivo traz só as letras do nome. O
+original completo e a licença estão em apresentacao/marca/.
+
+Os arquivos originais das outras duas, completos, vêm dentro do pacote Streamlit instalado no
+projeto.

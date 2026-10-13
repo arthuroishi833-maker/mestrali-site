@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <!-- viewport-fit=cover: no iPhone, a página pode ir até as bordas e o CSS afasta o conteúdo do "notch". -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mestrali: orçamento de serviço pronto no celular</title>
+  <meta name="description" content="Sistema de orçamentos para quem presta serviço na casa do cliente: ar-condicionado, elétrica, hidráulica, câmeras e assistência técnica. Veja o seu lucro na hora e envie o PDF pelo WhatsApp.">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="color-scheme" content="light">
+  <link rel="canonical" href="https://mestrali.com.br/">
+
+  <!-- Prévia que aparece quando o link é colado no WhatsApp e em redes sociais. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Mestrali">
+  <meta property="og:title" content="Orçamento pronto antes de sair do cliente">
+  <meta property="og:description" content="Total calculado sozinho, PDF pelo WhatsApp e o seu lucro na tela antes de fechar o serviço.">
+  <meta property="og:url" content="https://mestrali.com.br/">
+  <meta property="og:image" content="https://mestrali.com.br/midia/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- As fontes ficam no próprio site (pasta fontes/): nada é buscado em servidores de terceiros. -->
+  <link rel="preload" href="fontes/mestrali-serif.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fontes/mestrali-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fontes/mestrali-marca.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="estilo.css">
+  <!-- Marca que o JavaScript está ligado. As animações só escondem coisas quando esta classe existe:
+       sem JavaScript, a página aparece inteira, parada. -->
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ===================== TOPO ===================== -->
+  <header class="topo" id="topo">
+    <div class="caixa topo-linha">
+      <a class="marca" href="#conteudo" aria-label="Mestrali, início">Mestrali</a>
+      <nav class="topo-nav" aria-label="Seções">
+        <a href="#areas">Áreas</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#seu-lucro">Seu lucro</a>
+        <a href="#perguntas">Perguntas</a>
+      </nav>
+      <a class="botao botao-contorno botao-pequeno" href="https://wa.me/5527992432065?text=Ol%C3%A1!%20Vi%20a%20p%C3%A1gina%20da%20Mestrali%20e%20quero%20testar." target="_blank" rel="noopener">Quero testar</a>
+    </div>
+    <!-- Barrinha que acompanha a rolagem (o mesmo recurso do vídeo). -->
+    <div class="progresso" aria-hidden="true"><span id="progresso"></span></div>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- ===================== ABERTURA ===================== -->
+    <div class="abertura-fundo">
+    <section class="abertura caixa">
+      <div class="abertura-texto">
+        <h1 class="entra" style="--i:0">Orçamento pronto antes de sair do cliente.</h1>
+        <!-- A profissão troca sozinha a cada poucos segundos (site.js). Sem JavaScript, fica a primeira. -->
+        <p class="para-quem entra" style="--i:1">Para <span class="gira" id="gira"><b>técnicos de ar-condicionado</b></span></p>
+        <p class="lide entra" style="--i:1">Escolha os serviços no celular, veja o seu lucro
+          e envie o PDF pelo WhatsApp.</p>
+        <div class="acoes entra" style="--i:2" id="acoes">
+          <a class="botao botao-cheio" href="https://wa.me/5527992432065?text=Ol%C3%A1!%20Vi%20a%20p%C3%A1gina%20da%20Mestrali%20e%20quero%20testar." target="_blank" rel="noopener">Quero testar pelo WhatsApp</a>
+          <a class="link-seta" href="#como-funciona">Ver como funciona</a>
+        </div>
+        <p class="nota entra" style="--i:3">Em fase de testes em Vila Velha e Vitória. Sem custo durante o teste.</p>
+      </div>
+
+      <figure class="abertura-video entra" style="--i:2">
+        <div class="video-moldura">
+          <!-- "controls" é o plano B: se o JavaScript não rodar, o vídeo continua podendo ser tocado. -->
+          <video id="video" muted loop playsinline controls preload="metadata"
+                 poster="midia/capa-video.jpg" width="720" height="1280"
+                 aria-label="História em vídeo: o orçamento prometido para mais tarde, o cliente que fechou com outro e a saída, o orçamento feito na hora no celular">
+            <source src="midia/apresentacao.mp4" type="video/mp4">
+          </video>
+          <button class="video-botao" id="video-botao" type="button" hidden aria-label="Tocar o vídeo">
+            <svg class="i-tocar" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+            <svg class="i-pausar" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+          </button>
+          <!-- O vídeo começa mudo (os navegadores só deixam tocar sozinho assim). Este botão liga o som. -->
+          <button class="video-botao video-som" id="video-som" type="button" hidden aria-pressed="false" aria-label="Ligar o som">
+            <svg class="i-mudo" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path class="traco" d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
+            <svg class="i-som" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path class="traco" d="M15.5 9a4.2 4.2 0 010 6M18 6.5a7.6 7.6 0 010 11"/></svg>
+          </button>
+        </div>
+        <figcaption>Vídeo de 31 segundos. Começa sem som.</figcaption>
+      </figure>
+    </section>
+    </div>
+
+    <!-- Faixa de serviços que corre devagar: mostra a variedade de ofícios. A segunda lista é cópia, para emendar. -->
+    <div class="faixa" aria-label="Exemplos de serviços que dá para orçar">
+      <div class="faixa-trilho"><ul><li>Instalação de split</li><li>Instalação de tomada ou interruptor</li><li>Desentupimento de pia ou ralo</li><li>Instalação de câmera</li><li>Conserto de máquina de lavar</li><li>Limpeza / higienização</li><li>Instalação de chuveiro elétrico</li><li>Conserto de vazamento</li><li>Configuração de acesso pelo celular</li><li>Conserto de geladeira</li><li>Manutenção preventiva</li><li>Instalação de luminária</li><li>Troca de torneira</li><li>Manutenção de portão eletrônico</li><li>Carga de gás em geladeira</li><li>Carga de gás</li><li>Troca de disjuntor</li><li>Reparo de descarga</li><li>Instalação de interfone</li><li>Limpeza interna de máquina de lavar</li></ul><ul aria-hidden="true"><li>Instalação de split</li><li>Instalação de tomada ou interruptor</li><li>Desentupimento de pia ou ralo</li><li>Instalação de câmera</li><li>Conserto de máquina de lavar</li><li>Limpeza / higienização</li><li>Instalação de chuveiro elétrico</li><li>Conserto de vazamento</li><li>Configuração de acesso pelo celular</li><li>Conserto de geladeira</li><li>Manutenção preventiva</li><li>Instalação de luminária</li><li>Troca de torneira</li><li>Manutenção de portão eletrônico</li><li>Carga de gás em geladeira</li><li>Carga de gás</li><li>Troca de disjuntor</li><li>Reparo de descarga</li><li>Instalação de interfone</li><li>Limpeza interna de máquina de lavar</li></ul></div>
+    </div>
+
+    <!-- ===================== ÁREAS (o mesmo sistema, com o catálogo de cada ofício) ===================== -->
+    <section class="secao caixa" id="areas" aria-labelledby="t-areas">
+      <h2 id="t-areas" class="revelar">Serve para o seu ofício.</h2>
+      <p class="lide lide-secao revelar" style="--i:1">Escolha a sua área e veja um orçamento de exemplo. São os
+        serviços e peças que já vêm no catálogo; depois você troca pelos seus preços.</p>
+
+      <div class="areas revelar" style="--i:2" id="areas-caixa">
+        <div class="areas-abas" role="tablist" aria-label="Áreas de trabalho">
+          <button class="aba ativa" type="button" role="tab" id="aba-ar_condicionado" data-area="ar_condicionado"
+                  aria-selected="true" aria-controls="areas-painel">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="8" rx="2"/><path d="M7 10h10M8 16.5v2M12 16.5v3M16 16.5v2"/></svg><span>Ar-condicionado</span>
+          </button>
+          <button class="aba" type="button" role="tab" id="aba-eletrica" data-area="eletrica"
+                  aria-selected="false" aria-controls="areas-painel" tabindex="-1">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 13h6l-1 8 8-10h-6z"/></svg><span>Elétrica</span>
+          </button>
+          <button class="aba" type="button" role="tab" id="aba-hidraulica" data-area="hidraulica"
+                  aria-selected="false" aria-controls="areas-painel" tabindex="-1">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3.5 4.2 6 7.3 6 10.5a6 6 0 01-12 0C6 10.3 8.5 7.2 12 3z"/></svg><span>Hidráulica</span>
+          </button>
+          <button class="aba" type="button" role="tab" id="aba-seguranca" data-area="seguranca"
+                  aria-selected="false" aria-controls="areas-painel" tabindex="-1">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="13" height="8" rx="2"/><path d="M16 10l5-2v6l-5-2M7 15v4"/></svg><span>Câmeras e portões</span>
+          </button>
+          <button class="aba" type="button" role="tab" id="aba-linha_branca" data-area="linha_branca"
+                  aria-selected="false" aria-controls="areas-painel" tabindex="-1">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 6.5h2"/></svg><span>Geladeira e lavadora</span>
+          </button>
+        </div>
+
+        <div class="areas-painel" id="areas-painel" role="tabpanel" aria-labelledby="aba-ar_condicionado">
+          <div class="areas-catalogo">
+            <h3>No catálogo de exemplo</h3>
+            <p class="grupo">Serviços</p>
+            <ul class="fichas" id="fichas-servicos"><li style="--i:0"><span>Instalação de split</span><b>R$ 550,00</b></li><li style="--i:1"><span>Limpeza / higienização</span><b>R$ 180,00</b></li><li style="--i:2"><span>Manutenção preventiva</span><b>R$ 150,00</b></li><li style="--i:3"><span>Carga de gás</span><b>R$ 350,00</b></li></ul>
+            <p class="grupo">Peças</p>
+            <ul class="fichas" id="fichas-pecas"><li style="--i:0"><span>Capacitor</span><b>R$ 90,00</b></li><li style="--i:1"><span>Motor ventilador</span><b>R$ 420,00</b></li><li style="--i:2"><span>Bobina</span><b>R$ 220,00</b></li><li style="--i:3"><span>Compressor</span><b>R$ 1.450,00</b></li><li style="--i:4"><span>Placa eletrônica</span><b>R$ 580,00</b></li></ul>
+          </div>
+
+          <div class="areas-exemplo">
+            <div class="orc" id="orc" aria-live="polite">
+              <div class="orc-topo"><span class="orc-titulo">Orçamento de exemplo</span><span class="orc-equip" id="orc-equip">Split 12.000 BTUs</span></div>
+              <div id="orc-linhas"><div class="orc-linha" style="--i:0"><span>Limpeza / higienização</span><span>R$ 180,00</span></div><div class="orc-linha" style="--i:1"><span>Capacitor, 2 un.</span><span>R$ 180,00</span></div><div class="orc-linha" style="--i:2"><span>Carga de gás</span><span>R$ 350,00</span></div></div>
+              <div class="orc-total"><span>Total</span><span>R$ <b id="orc-total">710,00</b></span></div>
+            </div>
+            <div class="orc-lucro">
+              <span class="lt-rotulo">Seu lucro, só você vê</span>
+              <span class="lt-valor">R$ <b id="orc-lucro">480,00</b></span>
+              <span class="lt-margem">margem de <b id="orc-margem">67,6</b>%</span>
+            </div>
+          </div>
+        </div>
+        <p class="nota areas-nota">Outra área? Você começa com o catálogo vazio e cadastra os seus serviços.</p>
+      </div>
+    </section>
+
+    <!-- ===================== COMPARAÇÃO ===================== -->
+    <section class="secao caixa" aria-labelledby="t-comparar">
+      <h2 id="t-comparar" class="revelar">O mesmo orçamento, de dois jeitos.</h2>
+
+      <div class="comparar">
+        <div class="cmp-cabeca revelar" aria-hidden="true">
+          <span></span><span>No papel</span><span>Com a Mestrali</span>
+        </div>
+
+        <div class="cmp-linha revelar" style="--i:0">
+          <h3>Onde você monta</h3>
+          <p class="cmp-antes"><span class="rotulo">No papel</span>Em casa, depois do serviço.</p>
+          <p class="cmp-depois"><span class="rotulo">Com a Mestrali</span>No local, pelo celular, com o cliente do lado.</p>
+        </div>
+        <div class="cmp-linha revelar" style="--i:1">
+          <h3>A conta</h3>
+          <p class="cmp-antes"><span class="rotulo">No papel</span>Na calculadora, item por item.</p>
+          <p class="cmp-depois"><span class="rotulo">Com a Mestrali</span>Total somado sozinho, com mão de obra e desconto.</p>
+        </div>
+        <div class="cmp-linha revelar" style="--i:2">
+          <h3>O seu lucro</h3>
+          <p class="cmp-antes"><span class="rotulo">No papel</span>Só se você fizer outra conta à parte.</p>
+          <p class="cmp-depois"><span class="rotulo">Com a Mestrali</span>Na tela, antes de salvar. Só você vê.</p>
+        </div>
+        <div class="cmp-linha revelar" style="--i:3">
+          <h3>O que o cliente recebe</h3>
+          <p class="cmp-antes"><span class="rotulo">No papel</span>Uma mensagem digitada ou a foto da folha.</p>
+          <p class="cmp-depois"><span class="rotulo">Com a Mestrali</span>Um PDF com o seu nome, a sua logo e a validade.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== COMO FUNCIONA (a folha se preenche com a rolagem) ===================== -->
+    <section class="secao secao-nevoa" id="como-funciona" aria-labelledby="t-passos">
+      <div class="caixa">
+        <h2 id="t-passos" class="revelar">Quatro passos para montar. Um toque para enviar.</h2>
+
+        <div class="passos">
+          <!-- O "palco" fica parado enquanto os passos rolam. É só ilustração: o texto dos passos diz o mesmo. -->
+          <div class="palco-fixo" aria-hidden="true">
+            <div class="palco" id="palco" data-passo="4">
+              <!-- A "cena" tem o tamanho da folha; a etiqueta do lucro e a mensagem se prendem a ela. -->
+              <div class="cena">
+              <div class="folha">
+                <div class="folha-topo">
+                  <span class="f-titulo">Orçamento nº 0012</span>
+                  <span class="f-equip peca" data-desde="1">Split 12.000 BTUs</span>
+                </div>
+                <div class="f-linha" data-desde="1"><span>Cliente</span><span>Maria Conceição</span></div>
+                <div class="f-linha" data-desde="2" style="--i:0"><span>Limpeza / higienização</span><span>R$ 180,00</span></div>
+                <div class="f-linha" data-desde="2" style="--i:1"><span>Capacitor, 2 un.</span><span>R$ 180,00</span></div>
+                <div class="f-linha" data-desde="2" style="--i:2"><span>Carga de gás</span><span>R$ 350,00</span></div>
+                <div class="f-linha f-nota" data-desde="3" style="--i:0"><span>Pagamento</span><span>Pix ou cartão em 3x</span></div>
+                <div class="f-linha f-nota" data-desde="3" style="--i:1"><span>Validade</span><span>7 dias</span></div>
+                <div class="f-total" data-desde="4"><span>Total</span><span>R$ <b id="total-folha">710,00</b></span></div>
+                <span class="f-pdf peca" data-desde="5">PDF</span>
+              </div>
+
+              <div class="lucro-tag peca" data-desde="4" data-ate="4">
+                <span class="lt-rotulo">Seu lucro, só você vê</span>
+                <span class="lt-valor">R$ 480,00</span>
+                <span class="lt-margem">margem de 67,6%</span>
+              </div>
+
+              <div class="balao peca" data-desde="5">
+                <p>Olá, Maria! Aqui é da Clima Frio Refrigeração. Segue o orçamento para Split 12.000 BTUs.</p>
+                <p><strong>Total: R$ 710,00</strong></p>
+                <span class="anexo">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 3v4h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                  orcamento-maria.pdf
+                </span>
+              </div>
+              </div>
+            </div>
+            <div class="palco-marcas" id="palco-marcas"><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
+
+          <ol class="passos-lista" id="passos-lista">
+            <li>
+              <span class="p-numero">1</span>
+              <h3>Cliente</h3>
+              <p>Digite o nome e, se quiser, o WhatsApp e o equipamento. Nada de CPF nem endereço.</p>
+            </li>
+            <li>
+              <span class="p-numero">2</span>
+              <h3>Itens</h3>
+              <p>Toque nos serviços e peças do seu catálogo. Ele já vem com exemplos da sua área, e você troca
+                pelos seus preços. Também dá para incluir um item avulso.</p>
+            </li>
+            <li>
+              <span class="p-numero">3</span>
+              <h3>Valores</h3>
+              <p>Mão de obra, desconto em reais ou em porcentagem, forma de pagamento e validade.</p>
+            </li>
+            <li>
+              <span class="p-numero">4</span>
+              <h3>Revisão</h3>
+              <p>O total sai somado. Na mesma tela você vê o custo, o lucro e a margem daquele serviço.
+                Conferiu, é só salvar.</p>
+            </li>
+            <li>
+              <span class="p-numero p-envio" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 12.5l15-7-5.5 15-2.6-6.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+              </span>
+              <h3>Enviar</h3>
+              <p>Baixe o PDF e abra o WhatsApp com a mensagem já escrita. É só anexar o arquivo e enviar.
+                O lucro não vai no PDF.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== AS TELAS (capturas reais do sistema, com dados de exemplo) ===================== -->
+    <section class="secao caixa" aria-labelledby="t-telas">
+      <h2 id="t-telas" class="revelar">É assim na tela do seu celular.</h2>
+      <div class="telas revelar" style="--i:1" tabindex="0" role="group" aria-label="Três telas do sistema. Deslize para o lado para ver todas.">
+        <figure class="tela">
+          <img src="midia/tela-catalogo.webp" width="600" height="1128" loading="lazy" decoding="async"
+               alt="Tela Catálogo: lista de serviços e peças, cada um com o seu preço.">
+          <figcaption><strong>Catálogo</strong>Seus serviços e peças, com custo e preço.</figcaption>
+        </figure>
+        <figure class="tela">
+          <img src="midia/tela-revisao.webp" width="600" height="1000" loading="lazy" decoding="async"
+               alt="Tela Revisão: total de R$ 710,00 e o resumo interno com custo, lucro de R$ 480,00 e margem de 67,6%.">
+          <figcaption><strong>Revisão</strong>O total e o seu lucro, antes de salvar.</figcaption>
+        </figure>
+        <figure class="tela">
+          <img src="midia/tela-enviar.webp" width="600" height="1000" loading="lazy" decoding="async"
+               alt="Tela Enviar: botão para baixar o PDF, a mensagem pronta e o botão que abre o WhatsApp.">
+          <figcaption><strong>Enviar</strong>PDF e mensagem prontos para o WhatsApp.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===================== SEU LUCRO (os números do exemplo) ===================== -->
+    <section class="secao caixa" id="seu-lucro" aria-labelledby="t-lucro">
+      <h2 id="t-lucro" class="revelar">O número que o papel não mostra.</h2>
+      <p class="lide lide-secao revelar" style="--i:1">No orçamento do exemplo, o cliente paga R$&nbsp;710,00.
+        Peças e material custam R$&nbsp;230,00. O resto fica com você.</p>
+
+      <div class="lucro">
+        <div class="lucro-resumo revelar" id="lucro-resumo">
+          <p class="destaque-rotulo">Lucro deste orçamento</p>
+          <p class="destaque-valor">R$&nbsp;<span class="contar" data-ate="480" data-casas="2">480,00</span></p>
+          <p class="destaque-apoio">Margem de <span class="contar" data-ate="67.6" data-casas="1">67,6</span>%
+            sobre os R$&nbsp;710,00 cobrados.</p>
+
+          <!-- Barra proporcional: cada trecho tem a largura da sua parte no total. -->
+          <div class="barra" role="group" aria-label="Divisão dos R$ 710,00: R$ 230,00 de custo e R$ 480,00 de lucro">
+            <span class="trecho trecho-custo" style="flex:230" tabindex="0">
+              <span class="dica" role="tooltip">Custo: R$ 230,00 (32,4% do total)</span>
+            </span>
+            <span class="trecho trecho-lucro" style="flex:480" tabindex="0">
+              <span class="dica" role="tooltip">Lucro: R$ 480,00 (67,6% do total)</span>
+            </span>
+          </div>
+          <div class="legenda" aria-hidden="true">
+            <span style="flex:230"><i class="cor cor-custo"></i>Custo<b>R$ 230,00</b></span>
+            <span style="flex:480"><i class="cor cor-lucro"></i>Lucro<b>R$ 480,00</b></span>
+          </div>
+        </div>
+
+        <div class="lucro-tabela revelar" style="--i:1">
+          <div class="tabela-rolagem">
+            <table>
+              <caption>De onde vem o lucro do exemplo</caption>
+              <thead>
+                <tr><th scope="col">Item</th><th scope="col">Seu custo</th><th scope="col">Preço</th><th scope="col">Fica com você</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Limpeza / higienização</th><td>R$ 20,00</td><td>R$ 180,00</td><td>R$ 160,00</td></tr>
+                <tr><th scope="row">Capacitor, 2 un.</th><td>R$ 60,00</td><td>R$ 180,00</td><td>R$ 120,00</td></tr>
+                <tr><th scope="row">Carga de gás</th><td>R$ 150,00</td><td>R$ 350,00</td><td>R$ 200,00</td></tr>
+              </tbody>
+              <tfoot>
+                <tr><th scope="row">Total</th><td>R$ 230,00</td><td>R$ 710,00</td><td>R$ 480,00</td></tr>
+              </tfoot>
+            </table>
+          </div>
+          <p class="nota">São os preços de exemplo que já vêm no catálogo. Você troca pelos seus.</p>
+        </div>
+      </div>
+
+      <p class="aviso-cadeado revelar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 10.5V8a4 4 0 018 0v2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        <span>O cliente recebe os itens e o total. Custo, lucro e margem nunca aparecem no PDF nem na mensagem.</span>
+      </p>
+    </section>
+
+    <!-- ===================== O QUE ESPERAR ===================== -->
+    <section class="secao secao-nevoa" aria-labelledby="t-confianca">
+      <div class="caixa">
+        <h2 id="t-confianca" class="revelar">O que você pode esperar.</h2>
+        <ul class="garantias">
+          <li class="revelar" style="--i:0">
+            <svg class="visto" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path pathLength="1" d="M6.8 12.6l3.4 3.3 7-7.6"/></svg>
+            <div><h3>Seus dados, só você vê</h3>
+              <p>Cada técnico tem a própria conta. Orçamentos, clientes e preços de um não aparecem para outro.</p></div>
+          </li>
+          <li class="revelar" style="--i:1">
+            <svg class="visto" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path pathLength="1" d="M6.8 12.6l3.4 3.3 7-7.6"/></svg>
+            <div><h3>O cliente nunca vê o seu custo</h3>
+              <p>O PDF e a mensagem levam os itens e o total. O resumo de custo e lucro fica só na sua tela.</p></div>
+          </li>
+          <li class="revelar" style="--i:2">
+            <svg class="visto" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path pathLength="1" d="M6.8 12.6l3.4 3.3 7-7.6"/></svg>
+            <div><h3>Sem instalar nada</h3>
+              <p>Abre no navegador do celular ou do computador. Você entra com e-mail e senha.</p></div>
+          </li>
+          <li class="revelar" style="--i:3">
+            <svg class="visto" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path pathLength="1" d="M6.8 12.6l3.4 3.3 7-7.6"/></svg>
+            <div><h3>Você controla os seus dados</h3>
+              <p>Na tela Privacidade dá para baixar uma cópia de tudo ou apagar os dados de um cliente quando quiser.</p></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== PERGUNTAS ===================== -->
+    <section class="secao caixa caixa-estreita" id="perguntas" aria-labelledby="t-perguntas">
+      <h2 id="t-perguntas" class="revelar">Perguntas comuns.</h2>
+      <div class="perguntas revelar" style="--i:1">
+        <details>
+          <summary>Serve para a minha profissão?</summary>
+          <p>Serve para quem faz orçamento de serviço com peças e mão de obra. No primeiro acesso você escolhe a sua área (ar-condicionado e refrigeração, elétrica, hidráulica, câmeras e alarmes, geladeiras e máquinas de lavar) e o catálogo já vem com exemplos dela. Se a sua área não estiver na lista, você começa com o catálogo vazio e cadastra os seus serviços.</p>
+        </details>
+        <details>
+          <summary>Como eu começo a usar?</summary>
+          <p>A Mestrali está em fase de testes com prestadores de Vila Velha e Vitória, sem custo durante o teste. Chame no WhatsApp ou mande um e-mail e nós criamos o seu acesso.</p>
+        </details>
+        <details>
+          <summary>Preciso instalar algum aplicativo?</summary>
+          <p>Não. A Mestrali abre no navegador. No celular, você pode adicionar o site à tela inicial para abrir como se fosse um aplicativo.</p>
+        </details>
+        <details>
+          <summary>Funciona sem internet?</summary>
+          <p>Não. É preciso estar conectado para salvar o orçamento e gerar o PDF.</p>
+        </details>
+        <details>
+          <summary>O WhatsApp já abre com o PDF anexado?</summary>
+          <p>O WhatsApp abre na conversa do cliente com a mensagem escrita. O PDF você baixa com um toque e anexa na conversa.</p>
+        </details>
+        <details>
+          <summary>Posso usar a minha logo e os meus preços?</summary>
+          <p>Sim. No Perfil você coloca o nome, o telefone e a logo que saem no PDF. No Catálogo você cadastra os seus serviços e peças, cada um com custo e preço.</p>
+        </details>
+        <details>
+          <summary>Posso mudar o texto que vai para o cliente?</summary>
+          <p>Sim. Você grava a sua mensagem padrão no Perfil e ainda pode ajustar o texto na hora de enviar.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FECHO (o azul se abre, como no fim do vídeo) ===================== -->
+  <section class="fecho" id="fecho" aria-labelledby="t-fecho">
+    <div class="caixa fecho-dentro">
+      <svg class="fecho-folha" viewBox="0 0 120 104" aria-hidden="true">
+        <g transform="rotate(4 60 52)">
+          <rect x="14" y="10" width="92" height="80" rx="8" fill="#fff"/>
+          <rect x="14" y="10" width="92" height="7" rx="3.5" fill="#78ACF5"/>
+          <rect x="24" y="28" width="42" height="5" rx="2.5" fill="#D5DEE8"/><rect x="82" y="28" width="16" height="5" rx="2.5" fill="#D5DEE8"/>
+          <rect x="24" y="40" width="34" height="5" rx="2.5" fill="#D5DEE8"/><rect x="82" y="40" width="16" height="5" rx="2.5" fill="#D5DEE8"/>
+          <rect x="24" y="52" width="48" height="5" rx="2.5" fill="#D5DEE8"/><rect x="82" y="52" width="16" height="5" rx="2.5" fill="#D5DEE8"/>
+          <rect x="24" y="66" width="74" height="13" rx="4" fill="#0A58CA"/>
+        </g>
+        <circle cx="98" cy="84" r="15" fill="#16A364"/>
+        <path d="M91 84.5l5 4.8 9-9.6" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h2 id="t-fecho"><span>Orce com a</span> <b>Mestrali</b></h2>
+      <p>Orçamento profissional em minutos.</p>
+      <div class="fecho-acoes">
+        <a class="botao botao-claro" href="https://wa.me/5527992432065?text=Ol%C3%A1!%20Vi%20a%20p%C3%A1gina%20da%20Mestrali%20e%20quero%20testar." target="_blank" rel="noopener">Quero testar pelo WhatsApp</a>
+        <a class="fecho-email" href="tel:+5527992432065">(27) 99243-2065</a>
+        <a class="fecho-email" href="mailto:mestrali.orcamentos@gmail.com">mestrali.orcamentos@gmail.com</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="rodape">
+    <div class="caixa rodape-linha">
+      <span>© 2026 Mestrali</span>
+      <a href="https://wa.me/5527992432065?text=Ol%C3%A1!%20Vi%20a%20p%C3%A1gina%20da%20Mestrali%20e%20quero%20testar." target="_blank" rel="noopener">WhatsApp</a>
+      <a href="mailto:mestrali.orcamentos@gmail.com">E-mail</a>
+      <span class="rodape-nota">Este site não usa cookies nem rastreadores.</span>
+    </div>
+  </footer>
+
+  <!-- Botão que acompanha a rolagem no celular (some no começo e no fim, onde já existe um igual). -->
+  <div class="barra-fixa" id="barra-fixa">
+    <a class="botao botao-cheio" href="https://wa.me/5527992432065?text=Ol%C3%A1!%20Vi%20a%20p%C3%A1gina%20da%20Mestrali%20e%20quero%20testar." target="_blank" rel="noopener">Quero testar pelo WhatsApp</a>
+  </div>
+
+  <script src="areas.js" defer></script>
+  <script src="site.js" defer></script>
+</body>
+</html>
