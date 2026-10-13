@@ -75,7 +75,7 @@
 
     // ---------- 2b. A profissão que troca na abertura ----------
     var gira = document.getElementById("gira");
-    var profissoes = ["técnicos de ar-condicionado", "eletricistas", "encanadores", "instaladores de câmeras", "técnicos de linha branca"];
+    var profissoes = ["técnicos de ar-condicionado", "eletricistas", "encanadores", "instaladores de câmeras", "técnicos de linha branca", "mecânicos de bikes elétricas"];
     if (gira && !menosMovimento.matches) {
       var qual = 0;
       setInterval(function () {

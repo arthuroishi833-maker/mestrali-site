@@ -300,5 +300,65 @@ window.MESTRALI_AREAS = {
     "R$ 180,00"
    ]
   ]
+ },
+ "bikes_eletricas": {
+  "equip": "Bike elétrica aro 29",
+  "orc": [
+   [
+    "Revisão geral",
+    "R$ 200,00"
+   ],
+   [
+    "Troca de pneu ou câmara de ar",
+    "R$ 80,00"
+   ],
+   [
+    "Câmara de ar",
+    "R$ 50,00"
+   ]
+  ],
+  "total": 330.0,
+  "lucro": 275.0,
+  "margem": 83.3,
+  "servicos": [
+   [
+    "Visita técnica / diagnóstico",
+    "R$ 100,00"
+   ],
+   [
+    "Revisão geral",
+    "R$ 200,00"
+   ],
+   [
+    "Troca de pneu ou câmara de ar",
+    "R$ 80,00"
+   ],
+   [
+    "Regulagem de freios",
+    "R$ 70,00"
+   ],
+   [
+    "Reparo elétrico (controlador ou fiação)",
+    "R$ 180,00"
+   ]
+  ],
+  "pecas": [
+   [
+    "Câmara de ar",
+    "R$ 50,00"
+   ],
+   [
+    "Pastilha de freio (par)",
+    "R$ 60,00"
+   ],
+   [
+    "Controlador",
+    "R$ 420,00"
+   ],
+   [
+    "Carregador",
+    "R$ 220,00"
+   ]
+  ]
  }
 };
