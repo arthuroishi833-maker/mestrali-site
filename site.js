@@ -61,8 +61,10 @@
       setTimeout(function () { el.textContent = formatar(ate, casas); }, duracao + 120);
     }
 
-    var resumo = document.getElementById("lucro-resumo");
-    if (resumo && "IntersectionObserver" in window) {
+    // Os dois resumos com números que contam: o lucro do orçamento e o lucro do mês.
+    ["lucro-resumo", "mes-resumo"].forEach(function (id) {
+      var resumo = document.getElementById(id);
+      if (!resumo || !("IntersectionObserver" in window)) return;
       var vigiaNumeros = new IntersectionObserver(function (entradas) {
         if (!entradas[0].isIntersecting) return;
         resumo.querySelectorAll(".contar").forEach(function (el) {
@@ -71,7 +73,7 @@
         vigiaNumeros.disconnect();
       }, { threshold: 0.35 });
       vigiaNumeros.observe(resumo);
-    }
+    });
 
     // ---------- 2b. A profissão que troca na abertura ----------
     var gira = document.getElementById("gira");

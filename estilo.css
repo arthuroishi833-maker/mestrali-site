@@ -451,6 +451,36 @@ html:not(.js) .areas-abas { display: none; }
 .cor-custo { background: var(--azul); }
 .cor-lucro { background: var(--verde); }
 
+/* Seu mês: as três situações, o resumo do mês e duas telas */
+.mes { display: grid; gap: clamp(2.5rem, 6vw, 4rem); align-items: start; }
+@media (min-width: 900px) { .mes { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); } }
+.mes-texto { display: grid; gap: clamp(2rem, 5vw, 2.8rem); }
+.situacoes { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.8rem; }
+.situacoes li { display: grid; grid-template-columns: 8.2rem 1fr; gap: 0.9rem; align-items: center; }
+.pilula {
+  display: inline-flex; justify-content: center; padding: 0.42rem 0.6rem; border-radius: 10px;
+  border: 1px solid var(--linha); background: var(--branco); color: var(--tinta); font-weight: 600; font-size: 0.95rem;
+}
+.pilula-fechado { border-color: #A8C4F0; background: #E8F0FC; color: var(--azul-fundo); }
+.pilula-pago { border-color: var(--azul); background: var(--azul); color: var(--branco); }
+.trecho-pago { background: var(--azul); }
+.trecho-receber { background: #A8C4F0; border-radius: 0 4px 4px 0; }
+.trecho-pago .dica { left: 0; transform: translate(0, 4px); }
+.trecho-pago:focus .dica { transform: translate(0, 0); }
+@media (hover: hover) and (pointer: fine) { .trecho-pago:hover .dica { transform: translate(0, 0); } }
+.trecho-receber .dica { left: auto; right: 0; transform: translate(0, 4px); }
+.trecho-receber:focus .dica { transform: translate(0, 0); }
+@media (hover: hover) and (pointer: fine) { .trecho-receber:hover .dica { transform: translate(0, 0); } }
+.cor-pago { background: var(--azul); }
+.cor-receber { background: #A8C4F0; }
+.legenda-solta { justify-content: space-between; }
+.legenda-solta span:last-child { text-align: right; }
+.mes .nota { margin-top: 1rem; max-width: 40ch; }
+@media (min-width: 760px) {
+  .telas-duas { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none; padding-bottom: 3rem; }
+}
+@media (max-width: 420px) { .situacoes li { grid-template-columns: 1fr; gap: 0.35rem; } .pilula { justify-self: start; } }
+
 .tabela-rolagem { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
 caption { text-align: left; font-weight: 700; padding-bottom: 0.7rem; }

@@ -5,7 +5,7 @@
   <!-- viewport-fit=cover: no iPhone, a página pode ir até as bordas e o CSS afasta o conteúdo do "notch". -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Mestrali: orçamento de serviço pronto no celular</title>
-  <meta name="description" content="Sistema de orçamentos para quem presta serviço na casa do cliente: ar-condicionado, elétrica, hidráulica, câmeras e assistência técnica. Veja o seu lucro na hora e envie o PDF pelo WhatsApp.">
+  <meta name="description" content="Sistema de orçamentos para quem presta serviço na casa do cliente: ar-condicionado, elétrica, hidráulica, câmeras e assistência técnica. Veja o seu lucro na hora, envie o PDF pelo WhatsApp e acompanhe quem já pagou.">
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light">
   <link rel="canonical" href="https://mestrali.com.br/">
@@ -44,6 +44,7 @@
         <a href="#areas">Áreas</a>
         <a href="#como-funciona">Como funciona</a>
         <a href="#seu-lucro">Seu lucro</a>
+        <a href="#seu-mes">Financeiro</a>
         <a href="#perguntas">Perguntas</a>
       </nav>
       <a class="botao botao-contorno botao-pequeno" href="https://wa.me/5527992432065?text=Ol%C3%A1!%20Vi%20a%20p%C3%A1gina%20da%20Mestrali%20e%20quero%20testar." target="_blank" rel="noopener">Quero testar</a>
@@ -62,7 +63,7 @@
         <!-- A profissão troca sozinha a cada poucos segundos (site.js). Sem JavaScript, fica a primeira. -->
         <p class="para-quem entra" style="--i:1">Para <span class="gira" id="gira"><b>técnicos de ar-condicionado</b></span></p>
         <p class="lide entra" style="--i:1">Escolha os serviços no celular, veja o seu lucro
-          e envie o PDF pelo WhatsApp.</p>
+          e envie o PDF pelo WhatsApp. No fim do mês, saiba quanto entrou.</p>
         <div class="acoes entra" style="--i:2" id="acoes">
           <a class="botao botao-cheio" href="https://wa.me/5527992432065?text=Ol%C3%A1!%20Vi%20a%20p%C3%A1gina%20da%20Mestrali%20e%20quero%20testar." target="_blank" rel="noopener">Quero testar pelo WhatsApp</a>
           <a class="link-seta" href="#como-funciona">Ver como funciona</a>
@@ -348,6 +349,60 @@
       </p>
     </section>
 
+    <!-- ===================== SEU MÊS (situação dos orçamentos e a tela Financeiro) ===================== -->
+    <section class="secao secao-nevoa" id="seu-mes" aria-labelledby="t-mes">
+      <div class="caixa">
+        <h2 id="t-mes" class="revelar">Quem já pagou. Quem ainda deve.</h2>
+        <p class="lide lide-secao revelar" style="--i:1">Ao lado de cada orçamento, um toque diz como ele está.
+          A tela Financeiro soma o dia, o mês ou o ano e separa o que já entrou do que falta receber.</p>
+
+        <div class="mes">
+          <div class="mes-texto">
+            <ul class="situacoes revelar" aria-label="As três situações de um orçamento">
+              <li><span class="pilula">Não fechado</span><span>O cliente ainda não respondeu.</span></li>
+              <li><span class="pilula pilula-fechado">Fechado</span><span>Aceitou o serviço. O valor entra como a receber.</span></li>
+              <li><span class="pilula pilula-pago">Pago</span><span>Serviço feito e dinheiro na mão.</span></li>
+            </ul>
+
+            <div class="lucro-resumo revelar" style="--i:1" id="mes-resumo">
+              <p class="destaque-rotulo">Lucro do mês, no exemplo</p>
+              <p class="destaque-valor">R$&nbsp;<span class="contar" data-ate="1105" data-casas="2">1.105,00</span></p>
+              <p class="destaque-apoio">De R$&nbsp;1.500,00 em orçamentos fechados, R$&nbsp;240,00 ainda estão a receber.</p>
+              <!-- Barra proporcional do que foi fechado no mês: o que já entrou e o que falta receber. -->
+              <div class="barra" role="group" aria-label="R$ 1.500,00 fechados no mês: R$ 1.260,00 já pagos e R$ 240,00 a receber">
+                <span class="trecho trecho-pago" style="flex:1260" tabindex="0">
+                  <span class="dica" role="tooltip">Já pago: R$ 1.260,00</span>
+                </span>
+                <span class="trecho trecho-receber" style="flex:240" tabindex="0">
+                  <span class="dica" role="tooltip">A receber: R$ 240,00</span>
+                </span>
+              </div>
+              <!-- Legenda fora de proporção: o trecho "a receber" é estreito demais para caber o texto embaixo dele. -->
+              <div class="legenda legenda-solta" aria-hidden="true">
+                <span><i class="cor cor-pago"></i>Já pago<b>R$ 1.260,00</b></span>
+                <span><i class="cor cor-receber"></i>A receber<b>R$ 240,00</b></span>
+              </div>
+              <p class="nota">Três orçamentos com os preços de exemplo do catálogo: o de R$&nbsp;710,00 desta página,
+                uma instalação de split e uma manutenção.</p>
+            </div>
+          </div>
+
+          <div class="telas telas-duas revelar" style="--i:2" tabindex="0" role="group" aria-label="Duas telas do sistema. Deslize para o lado para ver as duas.">
+            <figure class="tela">
+              <img src="midia/tela-financeiro.webp" width="600" height="1310" loading="lazy" decoding="async"
+                   alt="Tela Financeiro de outubro: custo de R$ 395,00, ganho de R$ 1.500,00 e lucro de R$ 1.105,00, com a parte ainda a receber em cor mais clara.">
+              <figcaption><strong>Financeiro</strong>Custo, ganho e lucro do dia, do mês ou do ano.</figcaption>
+            </figure>
+            <figure class="tela">
+              <img src="midia/tela-orcamentos.webp" width="600" height="1360" loading="lazy" decoding="async"
+                   alt="Tela Meus orçamentos: cada orçamento com os botões Não fechado, Fechado e Pago.">
+              <figcaption><strong>Orçamentos</strong>A situação de cada um, com um toque.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===================== O QUE ESPERAR ===================== -->
     <section class="secao secao-nevoa" aria-labelledby="t-confianca">
       <div class="caixa">
@@ -403,7 +458,11 @@
         </details>
         <details>
           <summary>Posso usar a minha logo e os meus preços?</summary>
-          <p>Sim. No Perfil você coloca o nome, o telefone e a logo que saem no PDF. No Catálogo você cadastra os seus serviços e peças, cada um com custo e preço.</p>
+          <p>Sim. No Perfil você coloca o nome, o telefone e a logo que saem no PDF, e escolhe a cor de destaque do orçamento. No Catálogo você cadastra os seus serviços e peças, cada um com custo e preço.</p>
+        </details>
+        <details>
+          <summary>Consigo saber quanto ganhei no mês?</summary>
+          <p>Sim. Marque cada orçamento como não fechado, fechado ou pago. A tela Financeiro soma custo, ganho e lucro do dia, do mês ou do ano, e mostra quanto ainda falta receber. Só você vê essa tela.</p>
         </details>
         <details>
           <summary>Posso mudar o texto que vai para o cliente?</summary>
